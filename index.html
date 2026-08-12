@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atelier — tableau infini</title>
+  <title>Whiteboard — tableau infini</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
@@ -64,17 +64,19 @@
       border-right: 1px solid var(--sidebar-border);
       display: flex;
       flex-direction: column;
-      transition: width .22s cubic-bezier(.4,0,.2,1), min-width .22s cubic-bezier(.4,0,.2,1), opacity .18s ease;
+      transition: width .22s cubic-bezier(.4, 0, .2, 1), min-width .22s cubic-bezier(.4, 0, .2, 1), opacity .18s ease;
       overflow: hidden;
       z-index: 100;
       flex-shrink: 0;
     }
+
     #sidebar.collapsed {
       width: 0;
       min-width: 0;
       opacity: 0;
       pointer-events: none;
     }
+
     #sidebar-header {
       display: flex;
       align-items: center;
@@ -83,6 +85,7 @@
       border-bottom: 1px solid var(--sidebar-border);
       flex-shrink: 0;
     }
+
     #sidebar-brand {
       font-family: 'Fraunces', serif;
       font-style: italic;
@@ -96,6 +99,7 @@
       white-space: nowrap;
       overflow: hidden;
     }
+
     #sidebar-brand .mark {
       width: 8px;
       height: 8px;
@@ -103,6 +107,7 @@
       background: var(--blueprint);
       flex-shrink: 0;
     }
+
     #btn-new-board {
       display: flex;
       align-items: center;
@@ -120,15 +125,33 @@
       transition: background .14s ease, transform .1s ease;
       flex-shrink: 0;
     }
-    #btn-new-board:hover { background: #2d4a66; transform: translateY(-1px); }
-    #btn-new-board svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    #btn-new-board:hover {
+      background: #2d4a66;
+      transform: translateY(-1px);
+    }
+
+    #btn-new-board svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+    }
+
     #boards-list {
       flex: 1;
       overflow-y: auto;
       padding: 4px 8px 12px;
     }
-    #boards-list::-webkit-scrollbar { width: 4px; }
-    #boards-list::-webkit-scrollbar-thumb { background: var(--paper-line); border-radius: 4px; }
+
+    #boards-list::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    #boards-list::-webkit-scrollbar-thumb {
+      background: var(--paper-line);
+      border-radius: 4px;
+    }
+
     .board-item {
       display: flex;
       align-items: center;
@@ -141,14 +164,22 @@
       -webkit-user-select: none;
       user-select: none;
     }
-    .board-item:hover { background: var(--sidebar-item-hover); }
-    .board-item.active { background: var(--sidebar-item-active); }
+
+    .board-item:hover {
+      background: var(--sidebar-item-hover);
+    }
+
+    .board-item.active {
+      background: var(--sidebar-item-active);
+    }
+
     .board-item .board-icon {
       width: 16px;
       height: 16px;
       flex-shrink: 0;
       color: var(--ink-soft);
     }
+
     .board-item .board-name {
       flex: 1;
       font-size: 13px;
@@ -158,7 +189,11 @@
       text-overflow: ellipsis;
       line-height: 1.3;
     }
-    .board-item.active .board-name { font-weight: 500; }
+
+    .board-item.active .board-name {
+      font-weight: 500;
+    }
+
     .board-item .board-name-input {
       flex: 1;
       font-size: 13px;
@@ -170,6 +205,7 @@
       background: #fff;
       color: var(--ink);
     }
+
     .board-item .board-del {
       width: 22px;
       height: 22px;
@@ -184,9 +220,21 @@
       flex-shrink: 0;
       transition: background .1s ease, color .1s ease;
     }
-    .board-item:hover .board-del { display: flex; }
-    .board-item .board-del:hover { background: var(--danger); color: #fff; }
-    .board-item .board-del svg { width: 13px; height: 13px; }
+
+    .board-item:hover .board-del {
+      display: flex;
+    }
+
+    .board-item .board-del:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .board-item .board-del svg {
+      width: 13px;
+      height: 13px;
+    }
+
     #sidebar-footer {
       padding: 10px 12px 14px;
       border-top: 1px solid var(--sidebar-border);
@@ -196,51 +244,6 @@
       flex-shrink: 0;
       line-height: 1.4;
     }
-
-    /* ---------- Google Drive sync button ---------- */
-    #btn-gdrive {
-      display: flex; align-items: center; gap: 7px;
-      margin: 0 10px 10px; padding: 9px 12px; border-radius: 9px; border: none;
-      font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .02em;
-      cursor: pointer; transition: background .14s, color .14s, transform .1s; flex-shrink: 0;
-      width: calc(100% - 20px); justify-content: center;
-    }
-    #btn-gdrive.sync-off  { background: transparent; color: var(--ink-soft); border: 1px solid var(--sidebar-border); }
-    #btn-gdrive.sync-off:hover { background: var(--sidebar-hover); color: var(--ink); }
-    #btn-gdrive.sync-on   { background: #e6f4ec; color: #2d7a4f; border: 1px solid #b6dcca; }
-    #btn-gdrive.sync-on:hover { background: #d3eddf; }
-    #btn-gdrive.sync-busy { background: #fef3dc; color: #a06820; border: 1px solid #f0d68a; animation: spin-pulse .9s linear infinite; }
-    #btn-gdrive.sync-err  { background: #fde8e4; color: var(--danger); border: 1px solid #f0b8b0; }
-    @keyframes spin-pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
-    #btn-gdrive svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-    /* Google Drive config modal */
-    #gdrive-modal {
-      display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(43,43,43,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      align-items: center; justify-content: center;
-    }
-    #gdrive-modal.open { display: flex; }
-    #gdrive-modal-box {
-      background: var(--card-bg); border-radius: 18px; padding: 28px 28px 24px;
-      box-shadow: var(--shadow-lift); max-width: 420px; width: 90%;
-      font-family: 'Inter', sans-serif;
-    }
-    #gdrive-modal-box h2 { font-family: 'Fraunces',serif; font-style:italic; font-size:20px; margin:0 0 6px; color:var(--ink); }
-    #gdrive-modal-box p  { font-size:13px; color:var(--ink-soft); margin:0 0 16px; line-height:1.55; }
-    #gdrive-modal-box ol { font-size:12px; color:var(--ink-soft); margin:0 0 16px; padding-left:18px; line-height:1.8; }
-    #gdrive-modal-box ol a { color:var(--blueprint); }
-    #gdrive-client-id-input {
-      width:100%; padding:9px 11px; border:1px solid var(--paper-line); border-radius:8px;
-      font-family:'IBM Plex Mono',monospace; font-size:12px; outline:none; margin-bottom:12px;
-      -webkit-user-select:text; user-select:text;
-    }
-    #gdrive-client-id-input:focus { border-color:var(--blueprint); }
-    #gdrive-modal-actions { display:flex; gap:8px; justify-content:flex-end; }
-    #gdrive-modal-cancel { background:transparent; border:1px solid var(--paper-line); color:var(--ink-soft); border-radius:9px; padding:8px 16px; cursor:pointer; font-size:13px; }
-    #gdrive-modal-save   { background:var(--blueprint); border:none; color:#fff; border-radius:9px; padding:8px 18px; cursor:pointer; font-size:13px; font-weight:500; }
-    #gdrive-modal-save:hover { background:#2d4a66; }
-    #gdrive-status { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-soft); text-align:center; margin-bottom:10px; min-height:14px; }
 
     /* ---------- Main area ---------- */
     #main {
@@ -291,8 +294,16 @@
       color: var(--ink);
       transition: background .12s ease, box-shadow .12s ease;
     }
-    #btn-sidebar-toggle:hover { background: var(--paper); box-shadow: var(--shadow-lift); }
-    #btn-sidebar-toggle svg { width: 18px; height: 18px; }
+
+    #btn-sidebar-toggle:hover {
+      background: var(--paper);
+      box-shadow: var(--shadow-lift);
+    }
+
+    #btn-sidebar-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
 
     /* ---------- Top brand bar / breadcrumb ---------- */
     #breadcrumbBar {
@@ -359,20 +370,6 @@
       user-select: none;
     }
 
-    #hint {
-      position: absolute;
-      top: 46px;
-      left: 60px;
-      z-index: 50;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: .02em;
-      color: var(--ink-soft);
-      pointer-events: none;
-      max-width: 260px;
-      line-height: 1.5;
-    }
-
     /* ---------- Bottom toolbar ---------- */
     #toolbar {
       position: absolute;
@@ -413,7 +410,8 @@
       height: 19px;
     }
 
-    #zoomLabel {
+    #zoomLabel,
+    .selection-status {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 11px;
       color: var(--ink-soft);
@@ -423,6 +421,12 @@
       text-align: center;
       -webkit-user-select: none;
       user-select: none;
+    }
+
+    .selection-status {
+      opacity: 0.95;
+      min-width: 70px;
+      text-align: left;
     }
 
     .tsep {
@@ -504,6 +508,76 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      opacity: 1;
+      transform-origin: center center;
+      transition: box-shadow .15s ease, transform .18s ease, opacity .18s ease;
+    }
+
+    .block.pop {
+      animation: blockPop .34s ease-out forwards;
+    }
+
+    .block.leaving {
+      animation: blockFade .24s ease forwards;
+      pointer-events: none;
+    }
+
+    .block-particles {
+      position: absolute;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 10000;
+    }
+
+    .block-particles .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blueprint);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      animation: particleBurst .34s ease-out forwards;
+    }
+
+    @keyframes blockPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes blockFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+    }
+
+    @keyframes particleBurst {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.1);
+      }
     }
 
     .block.selected {
@@ -680,6 +754,64 @@
     }
 
     .upload-placeholder:hover {
+      background: var(--paper);
+    }
+
+    .file-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f7f2;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+
+    .file-content {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    .file-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(58, 90, 120, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .file-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--blueprint);
+    }
+
+    .file-info {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.87rem;
+      color: var(--ink);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-replace {
+      border: none;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.82rem;
+    }
+
+    .file-replace:hover {
       background: var(--paper);
     }
 
@@ -1076,147 +1208,138 @@
 
 <body>
 
-<div id="shell">
+  <div id="shell">
 
-  <!-- ========== SIDEBAR ========== -->
-  <nav id="sidebar">
-    <div id="sidebar-header">
-      <div id="sidebar-brand"><span class="mark"></span>Atelier</div>
-    </div>
-
-    <button id="btn-new-board">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-      Nouveau tableau
-    </button>
-
-    <div id="boards-list"></div>
-
-    <button id="btn-gdrive" class="sync-off">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 0 0 1.8-9.7A7 7 0 0 0 5.3 9 4 4 0 0 0 3 15z"/></svg>
-      Google Drive
-    </button>
-
-    <div id="sidebar-footer">
-      Double-clic sur le tableau<br>pour ajouter un bloc
-    </div>
-  </nav>
-
-  <!-- ===== Google Drive config modal ===== -->
-  <div id="gdrive-modal">
-    <div id="gdrive-modal-box">
-      <h2>☁ Sync Google Drive</h2>
-      <p>Pour synchroniser tes tableaux entre appareils, il faut un Client ID Google OAuth 2.0.</p>
-      <ol>
-        <li>Va sur <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a></li>
-        <li>Crée un projet → <strong>Activer l'API Google Drive</strong></li>
-        <li>Identifiants → <strong>Créer des identifiants → ID client OAuth 2.0</strong><br>Type : <em>Application Web</em></li>
-        <li>Dans <em>Origines JavaScript autorisées</em>, ajoute :<br><code>http://localhost:8080</code> (ou ton URL)</li>
-        <li>Copie l'<strong>ID client</strong> ci-dessous</li>
-        <li>Pour ouvrir le fichier depuis localhost :<br><code>python -m http.server 8080</code></li>
-      </ol>
-      <div id="gdrive-status"></div>
-      <input id="gdrive-client-id-input" type="text" placeholder="VOTRE_CLIENT_ID.apps.googleusercontent.com" autocomplete="off" spellcheck="false">
-      <div id="gdrive-modal-actions">
-        <button id="gdrive-modal-cancel">Annuler</button>
-        <button id="gdrive-modal-save">Enregistrer &amp; Connecter</button>
+    <!-- ========== SIDEBAR ========== -->
+    <nav id="sidebar">
+      <div id="sidebar-header">
+        <div id="sidebar-brand"><span class="mark"></span>Whiteboard</div>
       </div>
-    </div>
-  </div>
 
-  <!-- ========== MAIN ========== -->
-  <div id="main">
-
-    <!-- Sidebar toggle -->
-    <button id="btn-sidebar-toggle" title="Afficher / masquer le panneau">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 6h18M3 12h18M3 18h18"/>
-      </svg>
-    </button>
-
-    <div id="breadcrumbBar">
-      <span id="crumbHome" class="crumb crumb-home current"><span class="mark"></span>Atelier</span>
-      <span id="crumbTrail"></span>
-    </div>
-    <div id="hint">Double-clic pour ajouter un bloc · glisse un bloc sur un dossier pour le ranger · Molette pour zoomer à l'infini</div>
-
-    <div id="viewport">
-      <div id="world"></div>
-    </div>
-
-    <div class="empty-state" id="emptyState">
-      <div class="big">Ton tableau est vide</div>
-      <div class="small">DOUBLE-CLIC QUELQUE PART POUR COMMENCER</div>
-    </div>
-
-    <div id="addPin"></div>
-    <div id="addMenu">
-      <button data-type="text"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M4 6h16M4 12h16M4 18h10" />
-        </svg>Note</button>
-      <button data-type="image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="16" rx="2" />
-          <circle cx="8.5" cy="9.5" r="1.5" />
-          <path d="M21 16l-5-5-6 6" />
-        </svg>Image</button>
-      <button data-type="drawing"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M12 20l7-7a2.8 2.8 0 0 0-4-4l-7 7v4h4z" />
-          <path d="M4 20h4" />
-        </svg>Dessin</button>
-      <button data-type="voice"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <rect x="9" y="3" width="6" height="11" rx="3" />
-          <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
-        </svg>Vocal</button>
-      <button data-type="link"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M9 15l6-6M10 6l1-1a4 4 0 0 1 6 6l-1 1M14 18l-1 1a4 4 0 0 1-6-6l1-1" />
-        </svg>Lien</button>
-      <button data-type="video"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <rect x="3" y="5" width="14" height="14" rx="2" />
-          <path d="M17 10l4-2.5v9L17 14" />
-        </svg>Vidéo</button>
-      <button data-type="folder"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
-        </svg>Dossier</button>
-    </div>
-
-    <div id="toolbar">
-      <button class="tbtn" id="btnZoomOut" title="Dézoomer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.7" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7" />
-          <path d="M21 21l-4.3-4.3M8 11h6" />
-        </svg></button>
-      <span id="zoomLabel">100%</span>
-      <button class="tbtn" id="btnZoomIn" title="Zoomer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.7" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7" />
-          <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
-        </svg></button>
-      <button class="tbtn" id="btnZoomReset" title="Réinitialiser la vue"><svg viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 12a9 9 0 1 1 3 6.7M3 12v5h5" />
-        </svg></button>
-      <div class="tsep"></div>
-      <button class="tbtn" id="btnAdd" title="Ajouter un bloc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.9" stroke-linecap="round">
+      <button id="btn-new-board">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="M12 5v14M5 12h14" />
-        </svg></button>
-      <div class="tsep"></div>
-      <button class="tbtn" id="btnClear" title="Tout effacer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" />
-        </svg></button>
-    </div>
+        </svg>
+        Nouveau tableau
+      </button>
 
-    <div id="toast"></div>
+      <div id="boards-list"></div>
 
-  </div><!-- /main -->
-</div><!-- /shell -->
+      <div id="sidebar-footer">
+        Double-clic sur le tableau<br>pour ajouter un bloc
+      </div>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <div id="main">
+
+      <!-- Sidebar toggle -->
+      <button id="btn-sidebar-toggle" title="Afficher / masquer le panneau">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+
+      <div id="breadcrumbBar">
+        <span id="crumbHome" class="crumb crumb-home current"><span class="mark"></span>Whiteboard</span>
+        <span id="crumbTrail"></span>
+      </div>
+
+      <div id="viewport">
+        <div id="world"></div>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="big">Ton tableau est vide</div>
+        <div class="small">DOUBLE-CLIC QUELQUE PART POUR COMMENCER</div>
+      </div>
+
+      <div id="addPin"></div>
+      <div id="addMenu">
+        <button data-type="text"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 6h16M4 12h16M4 18h10" />
+          </svg>Note</button>
+        <button data-type="image"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <circle cx="8.5" cy="9.5" r="1.5" />
+            <path d="M21 16l-5-5-6 6" />
+          </svg>Image</button>
+        <button data-type="drawing"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M12 20l7-7a2.8 2.8 0 0 0-4-4l-7 7v4h4z" />
+            <path d="M4 20h4" />
+          </svg>Dessin</button>
+        <button data-type="voice"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="9" y="3" width="6" height="11" rx="3" />
+            <path d="M5 11a7 7 0 0 0 14 0M12 18v3" />
+          </svg>Vocal</button>
+        <button data-type="link"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M9 15l6-6M10 6l1-1a4 4 0 0 1 6 6l-1 1M14 18l-1 1a4 4 0 0 1-6-6l1-1" />
+          </svg>Lien</button>
+        <button data-type="video"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="3" y="5" width="14" height="14" rx="2" />
+            <path d="M17 10l4-2.5v9L17 14" />
+          </svg>Vidéo</button>
+        <button data-type="file"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M6 4h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+            <path d="M14 4v4h4" />
+            <path d="M9 12h6M9 16h6" />
+          </svg>Fichier</button>
+        <button data-type="folder"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+          </svg>Dossier</button>
+      </div>
+
+      <div id="toolbar">
+        <button class="tbtn" id="btnZoomOut" title="Dézoomer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.7" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3M8 11h6" />
+          </svg></button>
+        <span id="zoomLabel">100%</span>
+        <span id="selectionLabel" class="selection-status"></span>
+        <button class="tbtn" id="btnZoomIn" title="Zoomer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.7" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+          </svg></button>
+        <button class="tbtn" id="btnZoomReset" title="Réinitialiser la vue"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 1 3 6.7M3 12v5h5" />
+          </svg></button>
+        <div class="tsep"></div>
+        <button class="tbtn" id="btnAdd" title="Ajouter un bloc"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+            <path d="M12 5v14M5 12h14" />
+          </svg></button>
+        <button class="tbtn" id="btnGroupSelected" title="Grouper la sélection" disabled><svg viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
+            <path d="M12 11v6M9 14h6" />
+          </svg></button>
+        <button class="tbtn" id="btnDeleteSelected" title="Supprimer la sélection" disabled><svg viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" />
+          </svg></button>
+        <div class="tsep"></div>
+        <button class="tbtn" id="btnClear" title="Tout effacer"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" />
+          </svg></button>
+      </div>
+
+      <div id="toast"></div>
+
+    </div><!-- /main -->
+  </div><!-- /shell -->
 
   <script>
     (function () {
@@ -1229,18 +1352,21 @@
       var world = document.getElementById('world');
       var emptyState = document.getElementById('emptyState');
       var zoomLabel = document.getElementById('zoomLabel');
+      var selectionLabel = document.getElementById('selectionLabel');
+      var btnDeleteSelected = document.getElementById('btnDeleteSelected');
+      var btnGroupSelected = document.getElementById('btnGroupSelected');
       var toastEl = document.getElementById('toast');
 
       var camera = { x: 0, y: 0, zoom: 1 };   // world->screen: screenX = worldX*zoom + camera.x
       var blocks = [];                          // { id, type, x, y, w, h, z, ...typeData }
       var blockEls = {};                        // id -> DOM element
       var maxZ = 1;
-      var selectedId = null;
+      var selectedIds = [];
       var saveMetaTimer = null;
 
       // ---- Board navigation (dossiers = tableaux infinis imbriqués) ----
       var currentBoardId = 'root';              // id du tableau affiché dans le tableau actif
-      var currentBoardName = 'Atelier';
+      var currentBoardName = 'Whiteboard';
       var boardStack = [];                      // [{id, name}, ...] chemin depuis la racine
       var localBoards = {};                     // cache en mémoire de session: boardId -> payload
 
@@ -1256,7 +1382,7 @@
       // Multi-board index management
       // ---------------------------------------------------------------
       function getBoardsIndex() {
-        try { return JSON.parse(localStorage.getItem(BOARDS_INDEX_KEY) || '[]'); } catch(e) { return []; }
+        try { return JSON.parse(localStorage.getItem(BOARDS_INDEX_KEY) || '[]'); } catch (e) { return []; }
       }
       function saveBoardsIndex(list) {
         localStorage.setItem(BOARDS_INDEX_KEY, JSON.stringify(list));
@@ -1274,19 +1400,19 @@
 
       function renameBoardInIndex(id, newName) {
         var list = getBoardsIndex();
-        var b = list.find(function(x) { return x.id === id; });
+        var b = list.find(function (x) { return x.id === id; });
         if (b) { b.name = newName; saveBoardsIndex(list); }
       }
 
       function deleteBoardFromIndex(id) {
-        var list = getBoardsIndex().filter(function(x) { return x.id !== id; });
+        var list = getBoardsIndex().filter(function (x) { return x.id !== id; });
         saveBoardsIndex(list);
         var keysToDelete = [];
         for (var i = 0; i < localStorage.length; i++) {
           var k = localStorage.key(i);
           if (k && k.startsWith('atelier-v1-board:' + id)) keysToDelete.push(k);
         }
-        keysToDelete.forEach(function(k) { localStorage.removeItem(k); });
+        keysToDelete.forEach(function (k) { localStorage.removeItem(k); });
       }
 
       // ---------- Sidebar rendering ----------
@@ -1295,7 +1421,7 @@
       function renderSidebar() {
         var list = getBoardsIndex();
         boardsList.innerHTML = '';
-        list.forEach(function(board) {
+        list.forEach(function (board) {
           var item = document.createElement('div');
           item.className = 'board-item' + (board.id === activeBoardId ? ' active' : '');
 
@@ -1314,7 +1440,7 @@
           delBtn.className = 'board-del';
           delBtn.title = 'Supprimer ce tableau';
           delBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>';
-          delBtn.addEventListener('click', function(e) {
+          delBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             var list2 = getBoardsIndex();
             if (list2.length <= 1) { showToast('Impossible de supprimer le seul tableau.'); return; }
@@ -1328,14 +1454,14 @@
             }
           });
 
-          item.addEventListener('click', function(e) {
+          item.addEventListener('click', function (e) {
             if (e.target.closest('.board-del')) return;
             if (board.id === activeBoardId) return;
             switchToBoard(board);
           });
 
           // Double-clic pour renommer
-          nameEl.addEventListener('dblclick', function(e) {
+          nameEl.addEventListener('dblclick', function (e) {
             e.stopPropagation();
             var input = document.createElement('input');
             input.className = 'board-name-input';
@@ -1353,7 +1479,7 @@
               newSpan.addEventListener('dblclick', arguments.callee);
             }
             input.addEventListener('blur', commit);
-            input.addEventListener('keydown', function(ev) {
+            input.addEventListener('keydown', function (ev) {
               if (ev.key === 'Enter') { ev.preventDefault(); input.blur(); }
               if (ev.key === 'Escape') { input.value = board.name; input.blur(); }
               ev.stopPropagation();
@@ -1384,13 +1510,13 @@
       // ---------- Sidebar toggle ----------
       var sidebar = document.getElementById('sidebar');
       var sidebarOpen = true;
-      document.getElementById('btn-sidebar-toggle').addEventListener('click', function() {
+      document.getElementById('btn-sidebar-toggle').addEventListener('click', function () {
         sidebarOpen = !sidebarOpen;
         sidebar.classList.toggle('collapsed', !sidebarOpen);
       });
 
       // ---------- New board button ----------
-      document.getElementById('btn-new-board').addEventListener('click', function() {
+      document.getElementById('btn-new-board').addEventListener('click', function () {
         flushSave();
         var board = createNewBoard();
         teardownBoard();
@@ -1452,6 +1578,45 @@
         };
       }
 
+      // Smooth camera animation
+      var cameraAnimation = null;
+      function cancelCameraAnimation() {
+        if (cameraAnimation) {
+          cancelAnimationFrame(cameraAnimation);
+          cameraAnimation = null;
+        }
+      }
+
+      function animateCameraTo(target, duration) {
+        cancelCameraAnimation();
+        var start = performance.now();
+        var from = { x: camera.x, y: camera.y, zoom: camera.zoom };
+        var dx = target.x - from.x;
+        var dy = target.y - from.y;
+        var dz = target.zoom - from.zoom;
+        if (duration <= 0) {
+          camera.x = target.x;
+          camera.y = target.y;
+          camera.zoom = target.zoom;
+          applyCamera();
+          return;
+        }
+        function step(timestamp) {
+          var t = Math.min(1, (timestamp - start) / duration);
+          var ease = 1 - Math.pow(1 - t, 3);
+          camera.x = from.x + dx * ease;
+          camera.y = from.y + dy * ease;
+          camera.zoom = from.zoom + dz * ease;
+          applyCamera();
+          if (t < 1) {
+            cameraAnimation = requestAnimationFrame(step);
+          } else {
+            cameraAnimation = null;
+          }
+        }
+        cameraAnimation = requestAnimationFrame(step);
+      }
+
       // Zoom quasi infini (6 ordres de grandeur) : de 0.1% à 100000%
       var ZOOM_MIN = 0.001, ZOOM_MAX = 1000;
 
@@ -1459,10 +1624,10 @@
         var rect = viewport.getBoundingClientRect();
         var sx = clientX - rect.left, sy = clientY - rect.top;
         var worldBefore = { x: (sx - camera.x) / camera.zoom, y: (sy - camera.y) / camera.zoom };
-        camera.zoom = clamp(camera.zoom * factor, ZOOM_MIN, ZOOM_MAX);
-        camera.x = sx - worldBefore.x * camera.zoom;
-        camera.y = sy - worldBefore.y * camera.zoom;
-        applyCamera();
+        var targetZoom = clamp(camera.zoom * factor, ZOOM_MIN, ZOOM_MAX);
+        var targetX = sx - worldBefore.x * targetZoom;
+        var targetY = sy - worldBefore.y * targetZoom;
+        animateCameraTo({ x: targetX, y: targetY, zoom: targetZoom }, 220);
       }
 
       // ---------------------------------------------------------------
@@ -1476,6 +1641,7 @@
         if (b.type === 'text') m.text = b.text || '';
         if (b.type === 'link') m.url = b.url || '';
         if (b.type === 'video') m.url = b.url || '';
+        if (b.type === 'file') m.filename = b.filename || '';
         if (b.type === 'folder') m.name = b.name || '';
         if (b.hasMedia) m.hasMedia = true;
         return m;
@@ -1498,7 +1664,7 @@
         localBoards[currentBoardId] = payload;
         try {
           localStorage.setItem(lsKey(currentBoardId), JSON.stringify(payload));
-        } catch(e) { console.error('save meta error', e); }
+        } catch (e) { console.error('save meta error', e); }
       }
 
       // Récupère le payload d'un tableau sans l'afficher
@@ -1508,13 +1674,13 @@
           var raw = localStorage.getItem(lsKey(boardId));
           var p = raw ? JSON.parse(raw) : { blocks: [], camera: null, maxZ: 1 };
           return Promise.resolve(p);
-        } catch(e) { return Promise.resolve({ blocks: [], camera: null, maxZ: 1 }); }
+        } catch (e) { return Promise.resolve({ blocks: [], camera: null, maxZ: 1 }); }
       }
 
       function saveBlockMedia(id, dataUrl) {
         try {
           localStorage.setItem(lsMediaKey(id), dataUrl);
-        } catch(e) {
+        } catch (e) {
           showToast('Ce fichier est trop volumineux pour être sauvegardé, mais il reste visible dans cette session.');
         }
         return Promise.resolve(null);
@@ -1524,11 +1690,11 @@
         try {
           var v = localStorage.getItem(lsMediaKey(id));
           return Promise.resolve(v || null);
-        } catch(e) { return Promise.resolve(null); }
+        } catch (e) { return Promise.resolve(null); }
       }
 
       function deleteBlockMedia(id) {
-        try { localStorage.removeItem(lsMediaKey(id)); } catch(e) {}
+        try { localStorage.removeItem(lsMediaKey(id)); } catch (e) { }
       }
 
       // Charge et affiche le tableau `boardId` (racine ou dossier). Suppose que le monde est déjà vide (teardownBoard()).
@@ -1544,7 +1710,7 @@
           var payload = JSON.parse(raw);
           localBoards[boardId] = payload;
           applyPayload(payload);
-        } catch(e) {
+        } catch (e) {
           applyCamera();
           updateEmptyState();
         }
@@ -1575,7 +1741,8 @@
         blocks = [];
         blockEls = {};
         world.innerHTML = '';
-        selectedId = null;
+        selectedIds = [];
+        updateSelectionUI();
         maxZ = 1;
       }
 
@@ -1632,7 +1799,7 @@
         teardownBoard();
         boardStack = [];
         currentBoardId = 'root';
-        currentBoardName = 'Atelier';
+        currentBoardName = 'Whiteboard';
         loadBoard('root');
         updateBreadcrumb();
         closeAddMenu();
@@ -1675,6 +1842,7 @@
         voice: { w: 220, h: 150 },
         link: { w: 240, h: 130 },
         video: { w: 300, h: 210 },
+        file: { w: 260, h: 160 },
         folder: { w: 200, h: 175 }
       };
 
@@ -1708,12 +1876,92 @@
         if (b.recorder && b.recorder.state === 'recording') { try { b.recorder.stop(); } catch (e) { } }
         blocks.splice(idx, 1);
         var el = blockEls[id];
-        if (el && el.parentNode) el.parentNode.removeChild(el);
         delete blockEls[id];
+        animateBlockRemoval(el);
         if (b.hasMedia) deleteBlockMedia(id);
-        if (selectedId === id) selectedId = null;
+        var selIndex = selectedIds.indexOf(id);
+        if (selIndex !== -1) selectedIds.splice(selIndex, 1);
+        updateSelectionUI();
         updateEmptyState();
         scheduleSaveMeta();
+      }
+
+      function duplicateBlock(b) {
+        var copy = Object.assign({}, b, { id: uid(), x: b.x + 20, y: b.y + 20, z: ++maxZ });
+        if (b.hasMedia) {
+          copy.mediaData = b.mediaData;
+          copy.hasMedia = true;
+        }
+        if (b.filename) copy.filename = b.filename;
+        if (b.url) copy.url = b.url;
+        if (b.text) copy.text = b.text;
+        if (b.name) copy.name = b.name;
+        createBlockDom(copy, false);
+        updateEmptyState();
+        scheduleSaveMeta();
+        selectBlock(copy.id, false);
+        return copy;
+      }
+
+      function animateBlockEntry(el) {
+        if (!el) return;
+        el.classList.add('pop');
+        el.addEventListener('animationend', function onEnd() {
+          el.removeEventListener('animationend', onEnd);
+          el.classList.remove('pop');
+        });
+      }
+
+      function createBlockParticles(el) {
+        if (!el || !el.parentNode) return;
+        var rect = { left: parseFloat(el.style.left) || 0, top: parseFloat(el.style.top) || 0, width: parseFloat(el.style.width) || el.offsetWidth, height: parseFloat(el.style.height) || el.offsetHeight };
+        var container = document.createElement('div');
+        container.className = 'block-particles';
+        container.style.left = rect.left + 'px';
+        container.style.top = rect.top + 'px';
+        container.style.width = rect.width + 'px';
+        container.style.height = rect.height + 'px';
+
+        for (var i = 0; i < 8; i++) {
+          var p = document.createElement('span');
+          p.className = 'particle';
+          var angle = (Math.PI * 2 / 8) * i;
+          var distance = 32 + Math.random() * 16;
+          p.style.setProperty('--dx', Math.round(Math.cos(angle) * distance) + 'px');
+          p.style.setProperty('--dy', Math.round(Math.sin(angle) * distance) + 'px');
+          p.style.left = '50%';
+          p.style.top = '50%';
+          p.style.background = ['#3A5A78', '#8AA88F', '#C97B67', '#D8A24A', '#8E7CB0', '#B4924A'][i % 6];
+          container.appendChild(p);
+        }
+
+        world.appendChild(container);
+        setTimeout(function () {
+          if (container.parentNode) container.parentNode.removeChild(container);
+        }, 380);
+      }
+
+      function animateBlockRemoval(el, callback) {
+        if (!el) {
+          if (callback) callback();
+          return;
+        }
+        createBlockParticles(el);
+        var done = false;
+        function finish() {
+          if (done) return;
+          done = true;
+          if (el.parentNode) el.parentNode.removeChild(el);
+          if (callback) callback();
+        }
+        el.addEventListener('animationend', function onEnd(e) {
+          if (e.animationName === 'blockFade') {
+            el.removeEventListener('animationend', onEnd);
+            finish();
+          }
+        });
+        el.classList.add('leaving');
+        setTimeout(finish, 280);
       }
 
       // Retire un bloc du tableau courant SANS supprimer son média (il continue d'exister,
@@ -1725,9 +1973,11 @@
         if (bl.recorder && bl.recorder.state === 'recording') { try { bl.recorder.stop(); } catch (e) { } }
         blocks.splice(idx, 1);
         var el = blockEls[id];
-        if (el && el.parentNode) el.parentNode.removeChild(el);
         delete blockEls[id];
-        if (selectedId === id) selectedId = null;
+        animateBlockRemoval(el);
+        var selIndex = selectedIds.indexOf(id);
+        if (selIndex !== -1) selectedIds.splice(selIndex, 1);
+        updateSelectionUI();
         updateEmptyState();
       }
 
@@ -1746,15 +1996,101 @@
           payload.blocks.push(meta);
           if (!payload.camera) payload.camera = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2, zoom: 1 };
           localBoards[folderId] = payload;
-          try { localStorage.setItem(lsKey(folderId), JSON.stringify(payload)); } catch(e) {}
+          try { localStorage.setItem(lsKey(folderId), JSON.stringify(payload)); } catch (e) { }
           showToast('Bloc rangé dans « ' + (folderName || 'Dossier') + ' ».');
         });
       }
 
-      function selectBlock(id) {
-        if (selectedId && blockEls[selectedId]) blockEls[selectedId].classList.remove('selected');
-        selectedId = id;
-        if (id && blockEls[id]) blockEls[id].classList.add('selected');
+      function isSelected(id) {
+        return selectedIds.indexOf(id) !== -1;
+      }
+
+      function updateSelectionUI() {
+        Object.keys(blockEls).forEach(function (key) {
+          var el = blockEls[key];
+          if (!el) return;
+          el.classList.toggle('selected', isSelected(key));
+        });
+        if (btnDeleteSelected) btnDeleteSelected.disabled = selectedIds.length === 0;
+        if (btnGroupSelected) btnGroupSelected.disabled = selectedIds.length < 2;
+        if (selectionLabel) {
+          selectionLabel.textContent = selectedIds.length
+            ? selectedIds.length + ' sélectionné' + (selectedIds.length > 1 ? 's' : '')
+            : '';
+        }
+      }
+
+      function toggleBlockSelection(id) {
+        var idx = selectedIds.indexOf(id);
+        if (idx === -1) selectedIds.push(id);
+        else selectedIds.splice(idx, 1);
+        updateSelectionUI();
+      }
+
+      function selectBlock(id, additive) {
+        if (!id) {
+          selectedIds = [];
+          updateSelectionUI();
+          return;
+        }
+        if (additive) {
+          toggleBlockSelection(id);
+          return;
+        }
+        selectedIds = [id];
+        updateSelectionUI();
+      }
+
+      function removeSelectedBlocks() {
+        if (!selectedIds.length) return;
+        var removed = selectedIds.slice();
+        selectedIds = [];
+        removed.forEach(function (id) { removeBlock(id); });
+        updateSelectionUI();
+      }
+
+      function groupSelectedBlocks() {
+        if (selectedIds.length < 2) return;
+        var selected = blocks.filter(function (b) { return selectedIds.indexOf(b.id) !== -1; });
+        if (!selected.length) return;
+        var minX = selected[0].x, minY = selected[0].y;
+        var maxX = selected[0].x + selected[0].w, maxY = selected[0].y + selected[0].h;
+        selected.forEach(function (b) {
+          minX = Math.min(minX, b.x);
+          minY = Math.min(minY, b.y);
+          maxX = Math.max(maxX, b.x + b.w);
+          maxY = Math.max(maxY, b.y + b.h);
+        });
+        var folderWidth = Math.max(220, Math.round(maxX - minX + 60));
+        var folderHeight = Math.max(175, Math.round(maxY - minY + 60));
+        var folder = {
+          id: uid(),
+          type: 'folder',
+          x: minX,
+          y: minY,
+          w: folderWidth,
+          h: folderHeight,
+          z: ++maxZ,
+          color: COLORS[0],
+          name: 'Groupe'
+        };
+        var payload = { blocks: [], camera: { x: folderWidth / 2, y: folderHeight / 2, zoom: 1 }, maxZ: 0 };
+        selected.forEach(function (b) {
+          var meta = metaOf(b);
+          meta.x = Math.round(b.x - minX + 40);
+          meta.y = Math.round(b.y - minY + 40);
+          payload.blocks.push(meta);
+          payload.maxZ = Math.max(payload.maxZ, meta.z || 1);
+        });
+        if (payload.maxZ < 1) payload.maxZ = selected.length;
+        localBoards[folder.id] = payload;
+        try { localStorage.setItem(lsKey(folder.id), JSON.stringify(payload)); } catch (e) { }
+        selectedIds.slice().forEach(removeBlockLocal);
+        createBlockDom(folder, false);
+        updateEmptyState();
+        scheduleSaveMeta();
+        selectBlock(folder.id);
+        showToast('Sélection groupée dans un dossier.');
       }
 
       function bringToFront(b) {
@@ -1765,7 +2101,7 @@
       // ---------------------------------------------------------------
       // DOM construction per type
       // ---------------------------------------------------------------
-      var TYPE_LABEL = { text: 'Note', image: 'Image', drawing: 'Dessin', voice: 'Vocal', link: 'Lien', video: 'Vidéo', folder: 'Dossier' };
+      var TYPE_LABEL = { text: 'Note', image: 'Image', drawing: 'Dessin', voice: 'Vocal', link: 'Lien', video: 'Vidéo', file: 'Fichier', folder: 'Dossier' };
 
       function createBlockDom(b, fromLoad) {
         blocks.push(b);
@@ -1809,10 +2145,18 @@
 
         world.appendChild(el);
         blockEls[b.id] = el;
+        if (!fromLoad) {
+          animateBlockEntry(el);
+        }
 
         attachDrag(el, bar, b);
         attachResize(el, resizeHandle, b, body);
-        el.addEventListener('pointerdown', function () { bringToFront(b); selectBlock(b.id); });
+        el.addEventListener('pointerdown', function (e) {
+          if (e.target.closest('.block-close') || e.target.closest('.resize-handle')) return;
+          var additive = e.ctrlKey || e.metaKey;
+          bringToFront(b);
+          selectBlock(b.id, additive);
+        });
 
         buildBody(b, body, el);
         return el;
@@ -1826,6 +2170,7 @@
         else if (b.type === 'voice') buildVoice(b, body);
         else if (b.type === 'link') buildLink(b, body);
         else if (b.type === 'video') buildVideo(b, body);
+        else if (b.type === 'file') buildFile(b, body);
         else if (b.type === 'folder') buildFolder(b, body);
       }
 
@@ -2270,6 +2615,67 @@
       }
 
       // ----- folder -----
+      function buildFile(b, body) {
+        body.classList.add('file-body');
+        if (b.mediaData) {
+          renderFileContent(b, body);
+        } else {
+          renderFilePlaceholder(b, body);
+        }
+      }
+
+      function renderFilePlaceholder(b, body) {
+        body.innerHTML = '';
+        body.classList.add('file-body');
+        var ph = document.createElement('label');
+        ph.className = 'upload-placeholder';
+        ph.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M14 4v4h4"/><path d="M9 12h6M9 16h6"/></svg><span>Cliquer pour choisir un fichier</span>';
+        var input = document.createElement('input');
+        input.type = 'file'; input.style.display = 'none';
+        input.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+        input.addEventListener('click', function (e) { e.stopPropagation(); });
+        input.addEventListener('change', function () {
+          var file = input.files && input.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function () {
+            b.filename = file.name;
+            setBlockMedia(b, reader.result);
+            renderFileContent(b, body);
+            scheduleSaveMeta();
+          };
+          reader.readAsDataURL(file);
+        });
+        ph.appendChild(input);
+        ph.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+        body.appendChild(ph);
+      }
+
+      function renderFileContent(b, body) {
+        body.innerHTML = '';
+        body.classList.add('file-body');
+        var wrap = document.createElement('div');
+        wrap.className = 'file-content';
+        var icon = document.createElement('div');
+        icon.className = 'file-icon';
+        icon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M14 4v4h4"/></svg>';
+        var info = document.createElement('div');
+        info.className = 'file-info';
+        info.textContent = b.filename || 'Fichier';
+        var replace = document.createElement('button');
+        replace.className = 'file-replace';
+        replace.textContent = 'Remplacer';
+        replace.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+        replace.addEventListener('click', function (e) {
+          e.stopPropagation();
+          renderFilePlaceholder(b, body);
+        });
+        wrap.appendChild(icon);
+        wrap.appendChild(info);
+        wrap.appendChild(replace);
+        body.appendChild(wrap);
+      }
+
       function buildFolder(b, body) {
         body.classList.add('folder-body');
 
@@ -2351,6 +2757,8 @@
 
       function attachDrag(el, handle, b) {
         var dragging = false, startX = 0, startY = 0, origX = 0, origY = 0, hoverFolder = null;
+        var dragSelection = [];
+        var groupDrag = false;
         handle.addEventListener('pointerdown', function (e) {
           if (e.target !== handle && e.target.closest && e.target.closest('.block-close')) return;
           e.stopPropagation();
@@ -2360,28 +2768,57 @@
           origX = b.x; origY = b.y;
           el.classList.add('dragging');
           bringToFront(b);
-          selectBlock(b.id);
+          var wasSelected = isSelected(b.id);
+          var additive = e.ctrlKey || e.metaKey;
+          if (additive) {
+            selectBlock(b.id, true);
+          } else if (!wasSelected) {
+            selectBlock(b.id, false);
+          }
+          dragSelection = selectedIds.map(function (id) {
+            var block = blocks.find(function (x) { return x.id === id; });
+            return block ? { id: id, x: block.x, y: block.y } : null;
+          }).filter(Boolean);
+          groupDrag = dragSelection.length > 1;
         });
         handle.addEventListener('pointermove', function (e) {
           if (!dragging) return;
           var dx = (e.clientX - startX) / camera.zoom;
           var dy = (e.clientY - startY) / camera.zoom;
-          b.x = origX + dx;
-          b.y = origY + dy;
-          el.style.left = b.x + 'px';
-          el.style.top = b.y + 'px';
-          var fEl = findFolderUnderPoint(e.clientX, e.clientY, b.id);
-          if (fEl !== hoverFolder) {
-            if (hoverFolder) hoverFolder.classList.remove('drop-target');
-            hoverFolder = fEl;
-            if (hoverFolder) hoverFolder.classList.add('drop-target');
+          if (groupDrag) {
+            dragSelection.forEach(function (item) {
+              var block = blocks.find(function (x) { return x.id === item.id; });
+              if (!block) return;
+              block.x = item.x + dx;
+              block.y = item.y + dy;
+              var el2 = blockEls[item.id];
+              if (el2) {
+                el2.style.left = block.x + 'px';
+                el2.style.top = block.y + 'px';
+              }
+            });
+            if (hoverFolder) {
+              hoverFolder.classList.remove('drop-target');
+              hoverFolder = null;
+            }
+          } else {
+            b.x = origX + dx;
+            b.y = origY + dy;
+            el.style.left = b.x + 'px';
+            el.style.top = b.y + 'px';
+            var fEl = findFolderUnderPoint(e.clientX, e.clientY, b.id);
+            if (fEl !== hoverFolder) {
+              if (hoverFolder) hoverFolder.classList.remove('drop-target');
+              hoverFolder = fEl;
+              if (hoverFolder) hoverFolder.classList.add('drop-target');
+            }
           }
         });
         function stop(e) {
           if (!dragging) return;
           dragging = false;
           el.classList.remove('dragging');
-          if (hoverFolder) {
+          if (!groupDrag && hoverFolder) {
             hoverFolder.classList.remove('drop-target');
             var folderId = hoverFolder.dataset.id;
             var fb = blocks.find(function (x) { return x.id === folderId; });
@@ -2471,6 +2908,7 @@
 
       viewport.addEventListener('pointerdown', function (e) {
         if (e.target.closest('.block')) return;
+        cancelCameraAnimation();
         closeAddMenu();
         selectBlock(null);
         panState.active = true;
@@ -2505,17 +2943,17 @@
 
       viewport.addEventListener('wheel', function (e) {
         e.preventDefault();
-        var factor = Math.exp(-e.deltaY * 0.0035);
+        var factor = Math.exp(-e.deltaY * 0.0024);
         zoomAt(e.clientX, e.clientY, factor);
         scheduleSaveMeta();
       }, { passive: false });
 
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') { closeAddMenu(); selectBlock(null); }
-        if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId) {
+        if ((e.key === 'Delete' || e.key === 'Backspace') && selectedIds.length) {
           var active = document.activeElement;
           var isEditing = active && (active.isContentEditable || active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
-          if (!isEditing) { e.preventDefault(); removeBlock(selectedId); }
+          if (!isEditing) { e.preventDefault(); removeSelectedBlocks(); }
         }
       });
 
@@ -2531,20 +2969,20 @@
         scheduleSaveMeta();
       });
       document.getElementById('btnZoomReset').addEventListener('click', function () {
-        camera = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2, zoom: 1 };
-        applyCamera();
+        animateCameraTo({ x: viewport.clientWidth / 2, y: viewport.clientHeight / 2, zoom: 1 }, 220);
         scheduleSaveMeta();
       });
       document.getElementById('btnAdd').addEventListener('click', function () {
         openAddMenu(viewport.clientWidth / 2 - 100, viewport.clientHeight / 2 - 160, screenToWorld(viewport.clientWidth / 2, viewport.clientHeight / 2));
       });
-      document.getElementById('btnClear').addEventListener('click', function () {
-        if (!blocks.length) { return; }
-        if (!window.confirm('Supprimer tous les blocs du tableau ? Cette action est définitive.')) return;
-        blocks.slice().forEach(function (b) { removeBlock(b.id); });
-        showToast('Tableau vidé.');
+      document.getElementById('btnGroupSelected').addEventListener('click', function () {
+        groupSelectedBlocks();
       });
-
+      document.getElementById('btnDeleteSelected').addEventListener('click', function () {
+        if (!selectedIds.length) return;
+        if (!window.confirm('Supprimer les blocs sélectionnés ?')) return;
+        removeSelectedBlocks();
+      });
       // ---------------------------------------------------------------
       // Init
       // ---------------------------------------------------------------
@@ -2560,13 +2998,13 @@
           activeBoardId = board.id;
         } else {
           var saved = localStorage.getItem(ACTIVE_BOARD_KEY);
-          var found = list.find(function(x) { return x.id === saved; });
+          var found = list.find(function (x) { return x.id === saved; });
           activeBoardId = found ? saved : list[0].id;
         }
         localStorage.setItem(ACTIVE_BOARD_KEY, activeBoardId);
         var allBoards = getBoardsIndex();
-        var activeBoard = allBoards.find(function(x) { return x.id === activeBoardId; });
-        currentBoardName = activeBoard ? activeBoard.name : 'Atelier';
+        var activeBoard = allBoards.find(function (x) { return x.id === activeBoardId; });
+        currentBoardName = activeBoard ? activeBoard.name : 'Whiteboard';
         renderSidebar();
         camera = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2, zoom: 1 };
         applyCamera();
@@ -2575,247 +3013,13 @@
       })();
 
       // ═══════════════════════════════════════════════════════════
-      // GOOGLE DRIVE SYNC
-      // Requires: file served from http/https origin (not file://)
-      // Setup: console.cloud.google.com → OAuth 2.0 Client ID
-      // ═══════════════════════════════════════════════════════════
-      var GDRIVE_FILE_NAME = 'atelier-boards.json';
-      var GDRIVE_SCOPES = 'https://www.googleapis.com/auth/drive.file';
-      var gds = { token: null, fileId: null, busy: false };
-
-      function gdriveClientId() {
-        return localStorage.getItem('atelier-gdrive-clientid') || '';
-      }
-
-      function updateSyncUI(status) {
-        gds.busy = (status === 'busy');
-        var btn = document.getElementById('btn-gdrive');
-        if (!btn) return;
-        var icons = {
-          off:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 0 0 1.8-9.7A7 7 0 0 0 5.3 9 4 4 0 0 0 3 15z"/></svg>',
-          on:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 0 0 1.8-9.7A7 7 0 0 0 5.3 9 4 4 0 0 0 3 15z"/><path d="M9 12l2 2 4-4"/></svg>',
-          busy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 12V7h-5"/></svg>',
-          err:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15a4 4 0 0 0 4 4h9a5 5 0 0 0 1.8-9.7A7 7 0 0 0 5.3 9 4 4 0 0 0 3 15z"/><path d="M12 9v4M12 17h.01"/></svg>'
-        };
-        var map = {
-          off:  { cls: 'sync-off',  icon: icons.off,  label: 'Google Drive' },
-          on:   { cls: 'sync-on',   icon: icons.on,   label: 'Drive : synchronisé' },
-          busy: { cls: 'sync-busy', icon: icons.busy,  label: 'Sync en cours…' },
-          err:  { cls: 'sync-err',  icon: icons.err,  label: 'Erreur Drive' }
-        };
-        var s = map[status] || map.off;
-        btn.className = s.cls;
-        btn.innerHTML = s.icon + ' ' + s.label;
-      }
-
-      function gdriveApiCall(method, url, body, contentType) {
-        var opts = { method: method, headers: { Authorization: 'Bearer ' + gds.token } };
-        if (body) { opts.body = body; opts.headers['Content-Type'] = contentType || 'application/json'; }
-        return fetch(url, opts).then(function(r) {
-          if (r.status === 401) {
-            gds.token = null;
-            sessionStorage.removeItem('atelier-gdrive-token');
-            updateSyncUI('off');
-            if (localStorage.getItem('atelier-gdrive-connected') === 'true') {
-              gdriveConnect(true);
-            }
-            return Promise.reject('token_expired');
-          }
-          return r;
-        });
-      }
-
-      function gdriveSaveNow() {
-        if (!gds.token || gds.busy) return;
-        updateSyncUI('busy');
-        var idx = getBoardsIndex();
-        var boards = {};
-        for (var i = 0; i < localStorage.length; i++) {
-          var k = localStorage.key(i);
-          if (k && (k.startsWith('atelier-bd:') || k === IDX_KEY || k === ACTIVE_BOARD_KEY)) {
-            try { boards[k] = localStorage.getItem(k); } catch(e) {}
-          }
-        }
-        var payload = JSON.stringify({ version: 1, savedAt: new Date().toISOString(), boardsIndex: idx, data: boards });
-        var boundary = 'atelierBoundary314159';
-        var meta = JSON.stringify({ name: GDRIVE_FILE_NAME, mimeType: 'application/json' });
-        var body2 = '--' + boundary + '\r\nContent-Type: application/json\r\n\r\n' + meta +
-                   '\r\n--' + boundary + '\r\nContent-Type: application/json\r\n\r\n' + payload +
-                   '\r\n--' + boundary + '--';
-        var url = gds.fileId
-          ? 'https://www.googleapis.com/upload/drive/v3/files/' + gds.fileId + '?uploadType=multipart'
-          : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
-        var method = gds.fileId ? 'PATCH' : 'POST';
-        gdriveApiCall(method, url, body2, 'multipart/related; boundary="' + boundary + '"')
-          .then(function(r) { return r.json(); })
-          .then(function(d) {
-            if (d.id) { gds.fileId = d.id; localStorage.setItem('atelier-gdrive-fileid', d.id); }
-            updateSyncUI('on');
-          })
-          .catch(function(e) { console.warn('Drive save error:', e); updateSyncUI('err'); });
-      }
-
-      function gdriveLoad() {
-        if (!gds.token) return;
-        updateSyncUI('busy');
-        var q = encodeURIComponent("name='" + GDRIVE_FILE_NAME + "' and trashed=false");
-        gdriveApiCall('GET', 'https://www.googleapis.com/drive/v3/files?q=' + q + '&fields=files(id,modifiedTime)&pageSize=1')
-          .then(function(r) { return r.json(); })
-          .then(function(data) {
-            var files = (data && data.files) || [];
-            if (!files.length) { updateSyncUI('on'); return; }
-            gds.fileId = files[0].id;
-            localStorage.setItem('atelier-gdrive-fileid', gds.fileId);
-            return gdriveApiCall('GET', 'https://www.googleapis.com/drive/v3/files/' + gds.fileId + '?alt=media');
-          })
-          .then(function(r) { return r && r.json ? r.json() : null; })
-          .then(function(payload) {
-            if (!payload || !payload.data) { updateSyncUI('on'); return; }
-            Object.keys(payload.data).forEach(function(k) {
-              try { localStorage.setItem(k, payload.data[k]); } catch(e) {}
-            });
-            showToast('Données chargées depuis Google Drive ✓');
-            updateSyncUI('on');
-            // Reload UI with Drive data
-            (function reloadFromDrive() {
-              var list = getBoardsIndex();
-              if (!list.length) return;
-              var saved = localStorage.getItem(ACTIVE_BOARD_KEY);
-              var found = list.find(function(x) { return x.id === saved; });
-              activeBoardId = found ? saved : list[0].id;
-              var active = list.find(function(x) { return x.id === activeBoardId; });
-              currentBoardName = active ? active.name : 'Atelier';
-              teardownWorld();
-              localBoardCache = {};
-              renderSidebar();
-              camera = { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2, zoom: 1 };
-              applyCamera();
-              loadBoard(currentBoardId);
-              updateBreadcrumb();
-            })();
-          })
-          .catch(function(e) { console.warn('Drive load error:', e); updateSyncUI('err'); });
-      }
-
-      function gdriveConnect(silent) {
-        var cid = gdriveClientId();
-        if (!cid) { if (!silent) openGdriveModal(); return; }
-
-        var cachedToken = sessionStorage.getItem('atelier-gdrive-token');
-        if (cachedToken) {
-          gds.token = cachedToken;
-          gds.fileId = localStorage.getItem('atelier-gdrive-fileid') || null;
-          updateSyncUI('busy');
-          gdriveLoad();
-          return;
-        }
-
-        if (!window.google || !window.google.accounts) {
-          var s = document.createElement('script');
-          s.src = 'https://accounts.google.com/gsi/client';
-          s.onload = function() { gdriveRequestToken(cid, silent); };
-          s.onerror = function() { if (!silent) showToast('Impossible de charger Google Identity Services.'); updateSyncUI('err'); };
-          document.head.appendChild(s);
-        } else {
-          gdriveRequestToken(cid, silent);
-        }
-      }
-
-      function gdriveRequestToken(cid, silent) {
-        try {
-          var client = google.accounts.oauth2.initTokenClient({
-            client_id: cid,
-            scope: GDRIVE_SCOPES,
-            callback: function(resp) {
-              if (resp.error) {
-                if (resp.error === 'immediate_failed' || resp.error === 'interaction_required') {
-                  localStorage.removeItem('atelier-gdrive-connected');
-                  updateSyncUI('off');
-                } else {
-                  if (!silent) showToast('Erreur Google : ' + resp.error);
-                  updateSyncUI('err');
-                }
-                return;
-              }
-              gds.token = resp.access_token;
-              sessionStorage.setItem('atelier-gdrive-token', gds.token);
-              localStorage.setItem('atelier-gdrive-connected', 'true');
-
-              var expMs = ((resp.expires_in || 3600) - 60) * 1000;
-              setTimeout(function() {
-                gds.token = null;
-                sessionStorage.removeItem('atelier-gdrive-token');
-                updateSyncUI('off');
-                gdriveConnect(true);
-              }, expMs);
-
-              gds.fileId = localStorage.getItem('atelier-gdrive-fileid') || null;
-              updateSyncUI('busy');
-              gdriveLoad();
-            }
-          });
-          client.requestAccessToken({ prompt: silent ? 'none' : '' });
-        } catch(e) {
-          if (!silent) showToast('Erreur Drive. Le fichier doit être ouvert depuis http://localhost.');
-          updateSyncUI('err');
-        }
-      }
-
-      // Modal
-      function openGdriveModal() {
-        var modal = document.getElementById('gdrive-modal');
-        var inp = document.getElementById('gdrive-client-id-input');
-        if (inp) inp.value = gdriveClientId();
-        var st = document.getElementById('gdrive-status');
-        if (st) st.textContent = '';
-        if (modal) modal.classList.add('open');
-      }
-      document.getElementById('gdrive-modal-cancel').addEventListener('click', function() {
-        document.getElementById('gdrive-modal').classList.remove('open');
-      });
-      document.getElementById('gdrive-modal-save').addEventListener('click', function() {
-        var inp = document.getElementById('gdrive-client-id-input');
-        var val = (inp ? inp.value : '').trim();
-        var st = document.getElementById('gdrive-status');
-        if (!val || !val.includes('.apps.googleusercontent.com')) {
-          if (st) st.textContent = '⚠ Le client_id doit se terminer par .apps.googleusercontent.com';
-          return;
-        }
-        localStorage.setItem('atelier-gdrive-clientid', val);
-        document.getElementById('gdrive-modal').classList.remove('open');
-        showToast('Client ID enregistré — connexion en cours…');
-        gdriveConnect(false);
-      });
-      document.getElementById('btn-gdrive').addEventListener('click', function() {
-        if (!gds.token) {
-          gdriveConnect(false);
-        } else {
-          // Already connected: manual save
-          gdriveSaveNow();
-        }
-      });
-
-      // Auto-sync after each save (patch scheduleSaveMeta)
-      var _origSaveMeta = scheduleSaveMeta;
-      scheduleSaveMeta = function() {
-        _origSaveMeta && _origSaveMeta();
-        if (gds.token && !gds.busy) {
-          clearTimeout(scheduleSaveMeta._driveTimer);
-          scheduleSaveMeta._driveTimer = setTimeout(gdriveSaveNow, 1800);
-        }
-      };
-
-      // Auto-connect on load if client_id saved and file is http
+      // End of application setup
       (function autoConnect() {
-        var previouslyConnected = localStorage.getItem('atelier-gdrive-connected') === 'true';
-        if (gdriveClientId() && window.location.protocol !== 'file:') {
-          gdriveConnect(previouslyConnected);
-        }
       })();
 
     })();
   </script>
-</div><!-- /body end -->
+  </div><!-- /body end -->
 </body>
 
 </html>
