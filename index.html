@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Whiteboard — tableau infini</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FBF9F4'/%3E%3Cpath d='M 25 35 L 40 70 L 50 50 L 60 70 L 75 35' fill='none' stroke='%233A5A78' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <style>
     :root {
       --paper: #EDE9E0;
@@ -27,6 +26,22 @@
       --sidebar-border: #DDD8CC;
       --sidebar-item-hover: #EAE6DB;
       --sidebar-item-active: #E0DBD0;
+    }
+    :root[data-theme="dark"] {
+      --paper: #161616;
+      --paper-line: #262626;
+      --ink: #EAEAEA;
+      --ink-soft: #A0A0A0;
+      --blueprint: #5E8CB8;
+      --amber: #E2B663;
+      --card-bg: #222222;
+      --danger: #D46A54;
+      --sidebar-bg: #1A1A1A;
+      --sidebar-border: #2A2A2A;
+      --sidebar-item-hover: #262626;
+      --sidebar-item-active: #333333;
+      --shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 8px 20px rgba(0, 0, 0, 0.3);
+      --shadow-lift: 0 6px 16px rgba(0, 0, 0, 0.6), 0 16px 36px rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -1670,6 +1685,11 @@
         <button class="tbtn" id="btnClear" title="Vider le canva"><svg viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" />
+          </svg></button>
+        <div class="tsep"></div>
+        <button class="tbtn" id="btnThemeToggle" title="Mode sombre"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg></button>
       </div>
 
@@ -4178,11 +4198,24 @@
       // ═══════════════════════════════════════════════════════════
       // End of application setup
       (function autoConnect() {
-      })();
+      
+      var btnThemeToggle = document.getElementById('btnThemeToggle');
+      if (btnThemeToggle) {
+        var currentTheme = localStorage.getItem('whiteboard-theme') || 'light';
+        if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        btnThemeToggle.addEventListener('click', function () {
+          if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('whiteboard-theme', 'light');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('whiteboard-theme', 'dark');
+          }
+        });
+      }
+    })();
 
     })();
   </script>
-  </div><!-- /body end -->
 </body>
-
 </html>
